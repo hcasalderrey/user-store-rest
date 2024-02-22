@@ -4,7 +4,6 @@ Este proyecto previamente inicializado tiene todo lo necesario para trabajar con
 
 Cada paso de su configuración ya se ha realizado previamente en el curso, por lo que solo es necesario clonar el proyecto y comenzar a trabajar.
 
-
 ## Instalación
 
 1. Clonar .env.template a .env y configurar las variables de entorno
@@ -13,3 +12,4 @@ Cada paso de su configuración ya se ha realizado previamente en el curso, por l
 4. Ejecutar `npm run dev` para levantar el proyecto en modo desarrollo
 
 cambios para git
+Hernan Casalderrey
