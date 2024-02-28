@@ -1,14 +1,13 @@
-import { CreateCategoryDto, CustomError, PaginationDto } from "../../domain";
-import { Response,Request } from "express";
-//import { ProductService } from '../services';
-
+import { CreateProductDto, CustomError, PaginationDto } from "../../domain";
+import { Response,Request } from "express"; 
+import { ProductService } from '../services/product.service';
 
 
 
 export class ProductsController {
 
     constructor(
-        //private readonly productService: ProductService,
+        private readonly productService: ProductService,
     ){}
 
 
@@ -21,14 +20,17 @@ export class ProductsController {
     }
      
     createProduct =  (req: Request, res: Response ) =>{
-        //const [error, createCategoryDto] = CreateCategoryDto.create(req.body)
-        //if(error)  return res.status(400).json({error})
+        const [error, createProductDto] = CreateProductDto.create({
+            ...req.body,
+            user: req.body.user.id,
+        })
+        if(error)  return res.status(400).json({error})
         
-        // this.categoryService.createCategory(createCategoryDto!, req.body.user)
-        //    .then(category=> res.status(201).json(category))
-        //    .catch((error)=> this.handleError(error,res))
+        this.productService.createProduct(createProductDto! )
+           .then(product=> res.status(201).json(product))
+           .catch((error)=> this.handleError(error,res))
 
-        return res.json('create product')
+      
 
          
     }
@@ -40,12 +42,11 @@ export class ProductsController {
         const [error, pagination] = PaginationDto.create(+page, +limit)
 
         if(error)  return res.status(400).json({error})
-
-        return res.json('get products')
  
-        //this.categoryService.getCategories(pagination! )
-        //    .then(categories=> res.status(201).json(categories))
-        //    .catch(error=> this.handleError(error,res)) 
+ 
+        this.productService.getProducts(pagination! )
+           .then(products=> res.status(201).json(products))
+           .catch(error=> this.handleError(error,res)) 
 
     }
 
